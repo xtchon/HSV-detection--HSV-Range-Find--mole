@@ -15,7 +15,7 @@ class WindowCapture:
 
     # constructor
     def __init__(self, window_name=None):
-        if window_name is None:
+        if window_name == 'None':
             self.hwnd = win32gui.GetDesktopWindow()
         else:
             self.hwnd = win32gui.FindWindow(None, window_name)
