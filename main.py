@@ -19,15 +19,19 @@ up  = [int(n) for n in upper.split()]
 
 #绑定视窗
 wincap = WindowCapture(winname) #获取对应视窗截图
-win = win32gui.FindWindow(None, winname)
+if winname != 'None' and winname != 'Top':
+    win = win32gui.FindWindow(None, winname)
+elif winname == 'Top':
+    win = win32gui.GetForegroundWindow()
 loop_time = time()
 
 while(True):
-    window_rect = win32gui.GetWindowRect(win)#实时获取视窗位置大小
-    winx = window_rect[0] #视窗右上角x坐标
-    winy = window_rect[1] #视窗右上角y坐标
-    winw = window_rect[2] - winx #视窗宽度
-    winh = window_rect[3] - winy #视窗高度
+    if winname != 'None':
+        window_rect = win32gui.GetWindowRect(win)#实时获取视窗位置大小
+        winx = window_rect[0] #视窗右上角x坐标
+        winy = window_rect[1] #视窗右上角y坐标
+        winw = window_rect[2] - winx #视窗宽度
+        winh = window_rect[3] - winy #视窗高度
 
     screenshot = wincap.get_screenshot() #实时获取截图
     found = ProcessImg(screenshot,low,up,size) #对截图进行处理 

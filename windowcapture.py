@@ -1,5 +1,7 @@
 import numpy as np
 import win32gui, win32ui, win32con
+from time import sleep
+import win32com.client
 
 
 class WindowCapture:
@@ -15,8 +17,15 @@ class WindowCapture:
 
     # constructor
     def __init__(self, window_name=None):
+        
         if window_name == 'None':
             self.hwnd = win32gui.GetDesktopWindow()
+        elif window_name == 'Top':
+            print("请让你要识别的视窗置顶")
+            for i in list(range(5))[::-1]:
+                print(i+1)
+                sleep(1)
+            self.hwnd = win32gui.GetForegroundWindow()
         else:
             self.hwnd = win32gui.FindWindow(None, window_name)
             if not self.hwnd:
