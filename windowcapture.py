@@ -31,6 +31,8 @@ class WindowCapture:
             if not self.hwnd:
                 raise Exception('Window not found: {}'.format(window_name))
 
+    def get_screenshot(self):
+
         window_rect = win32gui.GetWindowRect(self.hwnd)
         self.w = window_rect[2] - window_rect[0]
         self.h = window_rect[3] - window_rect[1]
@@ -45,7 +47,6 @@ class WindowCapture:
         self.offset_x = window_rect[0] + self.cropped_x
         self.offset_y = window_rect[1] + self.cropped_y
 
-    def get_screenshot(self):
         wDC = win32gui.GetWindowDC(self.hwnd)
         dcObj = win32ui.CreateDCFromHandle(wDC)
         cDC = dcObj.CreateCompatibleDC()
